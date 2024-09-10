@@ -6,6 +6,7 @@ namespace Assets.HubShip
     {
         Renderer ArmRenderer { get; }
         Renderer BubbleRenderer { get; }
+        Collider BubbleCollider { get; }
         Material InactiveMaterial { get; }
         Material ActiveMaterial { get; }
     }

@@ -8,11 +8,13 @@ namespace Assets.HubShip
     public class ArmAnimationModule : AnimationModule
     {
         private IWireframeAnimationModule wam;
+        private IArmEventProcessorModule epm;
         private AnimationStep[] activationAnim;
 
         private Renderer arm;
         private Renderer bubble;
         private Vector3 bubbleScale;
+        private Collider bubbleCollider;
 
         private Material active;
         private Material inactive;
@@ -20,6 +22,7 @@ namespace Assets.HubShip
         private void Awake()
         {
             wam = GetComponent<IWireframeAnimationModule>();
+            epm = GetComponent<IArmEventProcessorModule>();
             var refs = GetComponent<IArmAnimationReferences>();
             var mm = GetComponent<IMaterialModule>();
 
@@ -30,11 +33,26 @@ namespace Assets.HubShip
             mm.ApplyUniqueMaterial(bubble);
             bubbleScale = bubble.transform.localScale;
             bubble.transform.localScale = Vector3.zero;
+            
+            bubbleCollider = refs.BubbleCollider;
+            bubbleCollider.enabled = false;
 
             active = refs.ActiveMaterial;
             inactive = refs.InactiveMaterial;
 
-            Play(GetActivationAnim());
+            //HandleStateChanged(ArmState.Active);
+        }
+
+        private void OnEnable() =>
+            epm.OnStateChanged.AddListener(HandleStateChanged);
+
+        private void OnDisable() =>
+            epm.OnStateChanged.RemoveListener(HandleStateChanged);
+
+        private void HandleStateChanged(ArmState state)
+        {
+            if (state == ArmState.Active)
+                Play(GetActivationAnim());
         }
 
         private void BlendWireframeMats(Material src, Material target, float duration)
@@ -57,7 +75,8 @@ namespace Assets.HubShip
             {
                 wam.DOWithProp(WireframeProps.WireColor, 1f, x, bubble.material.DOFade);
                 bubble.transform.DOScale(bubbleScale, x);
-            })
+            }),
+            new AnimationStep(0.5f, (_) => bubbleCollider.enabled = true)
         };
     }
 }
