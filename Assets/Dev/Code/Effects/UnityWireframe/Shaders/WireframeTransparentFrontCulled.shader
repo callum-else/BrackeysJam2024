@@ -14,7 +14,7 @@ Shader "SuperSystems/Wireframe-Transparent-Culled-Front"
 	{
 		Tags {
             "IgnoreProjector"="True"
-            "Queue"="Transparent"
+            "Queue"="Transparent-10"
             "RenderType"="Transparent"
         }
 
@@ -22,6 +22,7 @@ Shader "SuperSystems/Wireframe-Transparent-Culled-Front"
 		{
 			Blend SrcAlpha OneMinusSrcAlpha
             ZWrite Off
+			// ZTest Always
 			Cull Front
 
 			// Wireframe shader based on the the following
