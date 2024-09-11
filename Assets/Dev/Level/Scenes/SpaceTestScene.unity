@@ -216,7 +216,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   materialLayers:
-  - {fileID: 2100000, guid: bd93f064d0c54ccdaa7344c9264a4822, type: 2}
+  - {fileID: 2100000, guid: e69429e965248214f82c242f8cfebf01, type: 2}
   - {fileID: 2100000, guid: 331d6e4e8cddb5e498d3d008e427df66, type: 2}
   procedrualGradientEnabled: 1
   procedrualGradientUpdate: 0

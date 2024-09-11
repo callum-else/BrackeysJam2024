@@ -13,6 +13,7 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _LOCALNOISEPOSITION_ON
+  - _MASKAPPEARINVERT_ON
   - _MASKAPPEARNOISETRIPLANAR_ON
   - _MASKDEPTHFADEENABLED_ON
   - _NOISEDISTORTIONENABLED_ON
@@ -38,11 +39,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _HitWaveRampMask:
-        m_Texture: {fileID: 2800000, guid: aa34123ff5374ed7a40a6e309a2b6e85, type: 3}
+        m_Texture: {fileID: 2800000, guid: b744594383c14636aabc935f8783e904, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskAppearNoise:
-        m_Texture: {fileID: 2800000, guid: f93b3d6263af4b6e8df28a5a1914f769, type: 3}
+        m_Texture: {fileID: 2800000, guid: c9b256f565c646a38aa183bd548de557, type: 3}
         m_Scale: {x: 3, y: 0.25}
         m_Offset: {x: 0, y: 0}
     - _MaskAppearRamp:
@@ -50,7 +51,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Noise01:
-        m_Texture: {fileID: 2800000, guid: f93b3d6263af4b6e8df28a5a1914f769, type: 3}
+        m_Texture: {fileID: 2800000, guid: c9b256f565c646a38aa183bd548de557, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Noise02:
@@ -104,8 +105,8 @@ Material:
     - _CubemapReflectionEnabled: 0
     - _DepthFadeDistance: 2
     - _DepthFadeExp: 4
-    - _FinalPower: 4
-    - _FinalPowerAdjust: -1
+    - _FinalPower: 6
+    - _FinalPowerAdjust: 0
     - _FinalPowerSubtract: -1
     - _Float0: 0.5
     - _Float1: 0
@@ -117,16 +118,16 @@ Material:
     - _HitWaveDistortionPower: 2
     - _HitWaveFadeDistance: 5
     - _HitWaveFadeDistancePower: 2
-    - _HitWaveLength: 0.25
+    - _HitWaveLength: 0.125
     - _HitWaveNoiseNegate: 1
     - _InterceptionNoiseNegate: 1
-    - _InterceptionOffset: 0.33
+    - _InterceptionOffset: 0.66
     - _InterceptionPower: 1
     - _LocalNoisePosition: 1
     - _MaskAppearAdd: 1
-    - _MaskAppearInvert: 0
+    - _MaskAppearInvert: 1
     - _MaskAppearLocalYAdd: 0
-    - _MaskAppearLocalYRamap: 0.5
+    - _MaskAppearLocalYRamap: 0.4
     - _MaskAppearMultiply: 6
     - _MaskAppearNoiseNegate: 1
     - _MaskAppearNoiseTriplanar: 1
@@ -138,7 +139,7 @@ Material:
     - _MaskDepthFadeDistance: 3
     - _MaskDepthFadeEnabled: 1
     - _MaskDepthFadeExp: 4
-    - _MaskFresnelExp: 4
+    - _MaskFresnelExp: 2
     - _Noise01ScrollSpeed: 0.25
     - _Noise01Tiling: 0.125
     - _Noise02Enabled: 0
@@ -151,7 +152,7 @@ Material:
     - _NoiseMaskPower: 3.79
     - _NoisePower: 1
     - _NormalVertexOffset: 0
-    - _OpacityPower: 1
+    - _OpacityPower: 2
     - _OpacityPowerAdd: 0
     - _ProcedrualGradientEnabled: 0
     - _RampFlip: 0
@@ -170,5 +171,5 @@ Material:
     - _ProvedrualColor100: {r: 1, g: 0.72413796, b: 0, a: 1}
     - _ProvedrualColorEnd: {r: 1, g: 0.7306288, b: 0.3897058, a: 1}
     - _ProvedrualColorStart: {r: 1, g: 0.24604455, b: 0.07352937, a: 1}
-    - _RampColorTint: {r: 1, g: 1, b: 1, a: 1}
+    - _RampColorTint: {r: 1, g: 0.53676474, b: 0.53676474, a: 1}
   m_BuildTextureStacks: []
