@@ -1,7 +1,11 @@
-﻿namespace Assets.Environmental
+﻿using Assets.Common;
+using UnityEngine;
+
+namespace Assets.Environmental
 {
-    public interface IGlitchEffectPoolObjModule
+    public interface IGlitchEffectPoolObjModule : IComponent
     {
-        void ResetForPool();
+        void EnableForPool(Vector3 location);
+        void DisableForPool();
     }
 }

@@ -1,23 +1,28 @@
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 namespace Assets.Environmental
 {
     public class GlitchSpawnModule : MonoBehaviour
     {
         IGlitchEventProcessorModule eventModule;
-        private Transform active;
-        private Transform inactive;
+        private ObjectPool<IGlitchEffectPoolObjModule> pool;
         private GameObject glitchPrefab;
 
         private void Awake()
         {
             var refs = GetComponent<IGlitchSpawnModuleReferences>();
-            active = refs.ActivePoolParent;
-            inactive = refs.InactivePoolParent;
             glitchPrefab = refs.GlitchPrefab;
 
             eventModule = GetComponent<IGlitchEventProcessorModule>();
+
+            pool = new ObjectPool<IGlitchEffectPoolObjModule>(
+                createFunc: () => 
+                { 
+                    var obj = Instantiate(glitchPrefab, transform).GetComponent<IGlitchEffectPoolObjModule>();
+                    obj.gameObject.SetActive(false);
+                    return obj;
+                });
         }
 
         private void OnEnable() => 
@@ -28,18 +33,9 @@ namespace Assets.Environmental
 
         public void HandleGlitchSpawnEvent(Vector3 location)
         {
-            if (inactive.childCount != 0)
-            {
-                var poolObj = inactive.GetChild(0);
-                poolObj.GetComponent<IGlitchEffectPoolObjModule>().ResetForPool();
-                poolObj.parent = active;
-                poolObj.position = location;
-                poolObj.gameObject.SetActive(true);
-                return;
-            }
-            
-            glitchPrefab.transform.position = location;
-            Instantiate(glitchPrefab, active);
+            pool.Get(out var effect);
+            effect.EnableForPool(location);
+            effect.gameObject.SetActive(true);
         }
     }
 }

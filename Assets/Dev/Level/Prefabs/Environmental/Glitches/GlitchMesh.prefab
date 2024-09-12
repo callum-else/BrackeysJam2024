@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7150734524891400050}
   - component: {fileID: 3437713082288430296}
   - component: {fileID: 1142386784592330357}
+  - component: {fileID: 248331960053639531}
   - component: {fileID: 2459315664371568688}
   m_Layer: 7
   m_Name: GlitchMesh
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 3193334757743788350}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.1442615, y: 0, z: 4.8265715}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -117,6 +118,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f873f152ada3e3c4a9b1440a5e030c54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &248331960053639531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3193334757743788350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60e9a225793c8884a8731c713143bb40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &2459315664371568688

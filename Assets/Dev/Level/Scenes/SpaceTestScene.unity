@@ -163,7 +163,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 646853663}
+    m_TransformParent: {fileID: 1469997769}
     m_Modifications:
     - target: {fileID: 3193334757743788350, guid: 78b21af1db1eb9c40949cba496eb0651, type: 3}
       propertyPath: m_Name
@@ -199,15 +199,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7825479037625294505, guid: 78b21af1db1eb9c40949cba496eb0651, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7825479037625294505, guid: 78b21af1db1eb9c40949cba496eb0651, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7825479037625294505, guid: 78b21af1db1eb9c40949cba496eb0651, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7825479037625294505, guid: 78b21af1db1eb9c40949cba496eb0651, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -231,37 +231,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7825479037625294505, guid: 78b21af1db1eb9c40949cba496eb0651, type: 3}
   m_PrefabInstance: {fileID: 4291292}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &278192794
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 278192795}
-  m_Layer: 7
-  m_Name: GlitchPool.Active
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &278192795
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 278192794}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1469997769}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &300855296
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,7 +286,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 646853663}
+    m_TransformParent: {fileID: 1469997769}
     m_Modifications:
     - target: {fileID: 3193334757743788350, guid: 78b21af1db1eb9c40949cba496eb0651, type: 3}
       propertyPath: m_Name
@@ -353,15 +322,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7825479037625294505, guid: 78b21af1db1eb9c40949cba496eb0651, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7825479037625294505, guid: 78b21af1db1eb9c40949cba496eb0651, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7825479037625294505, guid: 78b21af1db1eb9c40949cba496eb0651, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7825479037625294505, guid: 78b21af1db1eb9c40949cba496eb0651, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -537,42 +506,6 @@ MonoBehaviour:
   _horizontalShake: 0.01
   _colorDrift: 0.5
   _shader: {fileID: 4800000, guid: da33272284ea24f208f36998880990be, type: 3}
---- !u!1 &646853662
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 646853663}
-  m_Layer: 7
-  m_Name: GlitchPool.Inactive
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &646853663
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 646853662}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 50, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1342287903}
-  - {fileID: 1528673852}
-  - {fileID: 420289941}
-  - {fileID: 1125679115}
-  - {fileID: 4291293}
-  m_Father: {fileID: 1469997769}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &737174427
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -911,7 +844,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 646853663}
+    m_TransformParent: {fileID: 1469997769}
     m_Modifications:
     - target: {fileID: 3193334757743788350, guid: 78b21af1db1eb9c40949cba496eb0651, type: 3}
       propertyPath: m_Name
@@ -947,15 +880,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7825479037625294505, guid: 78b21af1db1eb9c40949cba496eb0651, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7825479037625294505, guid: 78b21af1db1eb9c40949cba496eb0651, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7825479037625294505, guid: 78b21af1db1eb9c40949cba496eb0651, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7825479037625294505, guid: 78b21af1db1eb9c40949cba496eb0651, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1061,7 +994,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 646853663}
+    m_TransformParent: {fileID: 1469997769}
     m_Modifications:
     - target: {fileID: 3193334757743788350, guid: 78b21af1db1eb9c40949cba496eb0651, type: 3}
       propertyPath: m_Name
@@ -1185,8 +1118,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a39100dfda59da24385997ccb040b326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activePoolParent: {fileID: 278192795}
-  inactivePoolParent: {fileID: 646853663}
   glitchPrefab: {fileID: 3193334757743788350, guid: 78b21af1db1eb9c40949cba496eb0651, type: 3}
 --- !u!4 &1469997769
 Transform:
@@ -1197,12 +1128,15 @@ Transform:
   m_GameObject: {fileID: 1469997764}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 50, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 278192795}
-  - {fileID: 646853663}
+  - {fileID: 1342287903}
+  - {fileID: 1528673852}
+  - {fileID: 420289941}
+  - {fileID: 1125679115}
+  - {fileID: 4291293}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1528673851
@@ -1211,7 +1145,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 646853663}
+    m_TransformParent: {fileID: 1469997769}
     m_Modifications:
     - target: {fileID: 3193334757743788350, guid: 78b21af1db1eb9c40949cba496eb0651, type: 3}
       propertyPath: m_Name
@@ -1247,15 +1181,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7825479037625294505, guid: 78b21af1db1eb9c40949cba496eb0651, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7825479037625294505, guid: 78b21af1db1eb9c40949cba496eb0651, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7825479037625294505, guid: 78b21af1db1eb9c40949cba496eb0651, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7825479037625294505, guid: 78b21af1db1eb9c40949cba496eb0651, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
