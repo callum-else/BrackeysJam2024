@@ -6,5 +6,6 @@ namespace Assets.Common
     {
         Transform transform { get; }
         GameObject gameObject { get; }
+        int GetInstanceID();
     }
 }
