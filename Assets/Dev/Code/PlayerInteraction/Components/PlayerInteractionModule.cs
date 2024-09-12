@@ -38,6 +38,7 @@ namespace Assets.PlayerInteraction
                 return;
 
             target = module;
+            target.OnInteractionStart();
         }
 
         private void FixedUpdate()
