@@ -1,3 +1,4 @@
+using Assets.Global;
 using UnityEngine;
 
 namespace Assets.HubShip
@@ -10,6 +11,7 @@ namespace Assets.HubShip
 
     public class ArmStateModule : MonoBehaviour, IArmStateModule
     {
+        private IGlobalEventProcessorModule globalEventProcessor;
         private IArmEventProcessorModule eventProcessor;
         private IArmSettingsModule settingsModule;
         private ArmState state;
@@ -18,16 +20,21 @@ namespace Assets.HubShip
 
         private void Awake()
         {
+            globalEventProcessor = GetComponent<IGlobalEventProcessorModule>();
             eventProcessor = GetComponent<IArmEventProcessorModule>();
             settingsModule = GetComponent<IArmSettingsModule>();
             state = ArmState.Inactive;
         }
 
-        private void OnEnable() =>
-            eventProcessor.OnGameStageChanged.AddListener(HandleStageChanged);
+        private void OnEnable()
+        {
+            globalEventProcessor.OnStageChanged.AddListener(HandleStageChanged);
+        }
 
-        private void OnDisable() =>
-            eventProcessor.OnGameStageChanged.RemoveListener(HandleStageChanged);
+        private void OnDisable()
+        {
+            globalEventProcessor.OnStageChanged.RemoveListener(HandleStageChanged);
+        }
 
         private void HandleStageChanged(int stage)
         {
