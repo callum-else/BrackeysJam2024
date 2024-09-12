@@ -9,5 +9,6 @@ namespace Assets.Global
         UnityEvent<IShipSavedEventArgs> OnShipSaved { get; }
         UnityEvent<int> OnStageChanged { get; }
         UnityEvent<AudioClip> VoiceOverEvent { get; }
+        UnityEvent<Vector3> HarborPositionEvent { get; }
     }
 }

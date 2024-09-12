@@ -2,7 +2,7 @@
 
 namespace Assets.HubShip
 {
-    public interface IArmAnimationReferences
+    public interface IHarborReferences
     {
         Renderer ArmRenderer { get; }
         Renderer BubbleRenderer { get; }

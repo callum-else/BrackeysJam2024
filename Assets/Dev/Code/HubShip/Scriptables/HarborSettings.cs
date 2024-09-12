@@ -3,7 +3,7 @@
 namespace Assets.HubShip
 {
     [CreateAssetMenu(fileName = "New Arm Setting", menuName = "Scriptables/Hub Ship/Arm Settings")]
-    public class ArmSettings : ScriptableObject, IArmSettings
+    public class HarborSettings : ScriptableObject, IHarborSettings
     {
         [SerializeField] private int activationStage;
         public int ActivationStage { get => activationStage; }

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a61cf97fd67d0a542851abb5ce87a343, type: 3}
-  m_Name: HubArm004Settings
+  m_Name: Harbor004Settings
   m_EditorClassIdentifier: 
   activationStage: 7
   activationAudio: {fileID: 8300000, guid: 073ab036c4e6beb40b67de24cc9c1a65, type: 3}

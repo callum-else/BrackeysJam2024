@@ -5,10 +5,10 @@ using UnityEngine;
 
 namespace Assets.HubShip
 {
-    public class ArmAnimationModule : AnimationModule
+    public class HarborAnimationModule : AnimationModule
     {
         private IWireframeAnimationModule wam;
-        private IArmEventProcessorModule epm;
+        private IHarborEventProcessorModule epm;
         private AnimationStep[] activationAnim;
 
         private Renderer arm;
@@ -22,8 +22,8 @@ namespace Assets.HubShip
         private void Awake()
         {
             wam = GetComponent<IWireframeAnimationModule>();
-            epm = GetComponent<IArmEventProcessorModule>();
-            var refs = GetComponent<IArmAnimationReferences>();
+            epm = GetComponent<IHarborEventProcessorModule>();
+            var refs = GetComponent<IHarborReferences>();
             var mm = GetComponent<IMaterialModule>();
 
             arm = refs.ArmRenderer;
@@ -49,9 +49,9 @@ namespace Assets.HubShip
         private void OnDisable() =>
             epm.OnStateChanged.RemoveListener(HandleStateChanged);
 
-        private void HandleStateChanged(ArmState state)
+        private void HandleStateChanged(HarborState state)
         {
-            if (state == ArmState.Active)
+            if (state == HarborState.Active)
                 Play(GetActivationAnim());
         }
 

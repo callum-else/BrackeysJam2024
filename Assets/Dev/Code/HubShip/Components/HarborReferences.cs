@@ -2,7 +2,7 @@
 
 namespace Assets.HubShip
 {
-    public class ArmAnimationReferences : MonoBehaviour, IArmAnimationReferences
+    public class HarborReferences : MonoBehaviour, IHarborReferences
     {
         [SerializeField] private Renderer armRenderer;
         public Renderer ArmRenderer { get => armRenderer; }

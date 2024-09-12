@@ -216,7 +216,7 @@ GameObject:
   - component: {fileID: 476411322}
   - component: {fileID: 476411323}
   m_Layer: 0
-  m_Name: Hub.Arms
+  m_Name: Hub.Harbors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1135,7 +1135,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4581635801373605691, guid: ddd1c90b3d5d5534c98284033dbd2cd2, type: 3}
       propertyPath: m_Name
-      value: Arm.001
+      value: Harbor.001
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1197,7 +1197,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2561491553769857326, guid: 2e6ec7ac545ab1846a3ec840a25c300c, type: 3}
       propertyPath: m_Name
-      value: Arm.003
+      value: Harbor.003
       objectReference: {fileID: 0}
     - target: {fileID: 6165306207635679454, guid: 2e6ec7ac545ab1846a3ec840a25c300c, type: 3}
       propertyPath: settings
@@ -1293,7 +1293,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6842478860127106497, guid: eca2898c3790ee349b5eac94ce47823b, type: 3}
       propertyPath: m_Name
-      value: Arm.004
+      value: Harbor.004
       objectReference: {fileID: 0}
     - target: {fileID: 7947797463991492368, guid: eca2898c3790ee349b5eac94ce47823b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1355,6 +1355,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1782288133}
   - component: {fileID: 1782288132}
+  - component: {fileID: 1782288137}
+  - component: {fileID: 1782288136}
   - component: {fileID: 1782288134}
   - component: {fileID: 1782288135}
   m_Layer: 0
@@ -1515,6 +1517,30 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &1782288136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782288131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aace6b27305e50241b6840a9a3953652, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1782288137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782288131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4a9b3aabe58e8e459ef4164cb1ec9a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1844584601
 GameObject:
   m_ObjectHideFlags: 0
@@ -2013,7 +2039,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1895970694683168945, guid: d882451444b878d4fbd5604c2d347d16, type: 3}
       propertyPath: m_Name
-      value: Arm.002
+      value: Harbor.002
       objectReference: {fileID: 0}
     - target: {fileID: 3095862622947146336, guid: d882451444b878d4fbd5604c2d347d16, type: 3}
       propertyPath: m_LocalPosition.x

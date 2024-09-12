@@ -1,15 +1,16 @@
 using Assets.PlayerInteraction;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace Assets.Ships
 {
-    public class ShipPathModule : MonoBehaviour, IRecievePrimaryInteraction
+    public class ShipPathModule : MonoBehaviour, IShipPathModule, IRecievePrimaryInteraction
     {
         private LineRenderer lineRenderer;
         private List<Vector3> path = new();
+
+        public List<Vector3> Path => path;
 
         private void Awake()
         {

@@ -9,5 +9,6 @@ namespace Assets.Global
         public UnityEvent<IShipSavedEventArgs> OnShipSaved => GlobalEventProcessorLogic.OnShipSaved;
         public UnityEvent<int> OnStageChanged => GlobalEventProcessorLogic.OnStageChanged;
         public UnityEvent<AudioClip> VoiceOverEvent => GlobalEventProcessorLogic.VoiceOverEvent;
+        public UnityEvent<Vector3> HarborPositionEvent => GlobalEventProcessorLogic.HarborPositionEvent;
     }
 }

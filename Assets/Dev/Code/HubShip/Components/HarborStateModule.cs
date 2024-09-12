@@ -3,27 +3,27 @@ using UnityEngine;
 
 namespace Assets.HubShip
 {
-    public enum ArmState
+    public enum HarborState
     {
         Active,
         Inactive
     }
 
-    public class ArmStateModule : MonoBehaviour, IArmStateModule
+    public class HarborStateModule : MonoBehaviour, IHarborStateModule
     {
         private IGlobalEventProcessorModule globalEventProcessor;
-        private IArmEventProcessorModule eventProcessor;
-        private IArmSettingsModule settingsModule;
-        private ArmState state;
+        private IHarborEventProcessorModule eventProcessor;
+        private IHarborSettingsModule settingsModule;
+        private HarborState state;
 
-        public ArmState State { get; }
+        public HarborState State { get; }
 
         private void Awake()
         {
             globalEventProcessor = GetComponent<IGlobalEventProcessorModule>();
-            eventProcessor = GetComponent<IArmEventProcessorModule>();
-            settingsModule = GetComponent<IArmSettingsModule>();
-            state = ArmState.Inactive;
+            eventProcessor = GetComponent<IHarborEventProcessorModule>();
+            settingsModule = GetComponent<IHarborSettingsModule>();
+            state = HarborState.Inactive;
         }
 
         private void OnEnable()
@@ -38,13 +38,13 @@ namespace Assets.HubShip
 
         private void HandleStageChanged(int stage)
         {
-            if (state == ArmState.Active)
+            if (state == HarborState.Active)
                 return;
 
             if (stage < settingsModule.Settings.ActivationStage)
                 return;
 
-            state = ArmState.Active;
+            state = HarborState.Active;
             eventProcessor.OnStateChanged.Invoke(state);
             globalEventProcessor.VoiceOverEvent.Invoke(settingsModule.Settings.ActivationAudio);
         }
