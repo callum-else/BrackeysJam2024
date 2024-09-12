@@ -18,13 +18,13 @@ namespace Assets.Ships
 
         public void GetMouseWorldPosition(Vector3 position)
         {
-            if (path.Count > 0 && Vector3.Distance(position, path.Last()) < 1.5f)
-                return;
+            if (path.Count == 0 || Vector3.Distance(position, path.Last()) > 2f)
+            {
+                path.Add(position);
+                lineRenderer.positionCount++;
+            }
 
-            path.Add(position);
-            lineRenderer.positionCount++;
             lineRenderer.SetPosition(lineRenderer.positionCount - 1, position);
-            Debug.Log("Position Added");
         }
 
         public void OnInteractionStart()
