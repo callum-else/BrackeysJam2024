@@ -76,7 +76,10 @@ namespace Assets.HubShip
                 wam.DOWithProp(WireframeProps.WireColor, 1f, x, bubble.material.DOFade);
                 bubble.transform.DOScale(bubbleScale, x);
             }),
-            new AnimationStep(0.5f, (_) => bubbleCollider.enabled = true)
+            new AnimationStep(0.5f, (_) => 
+            {
+                bubbleCollider.enabled = true; 
+            })
         };
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine.Events;
+﻿using UnityEngine;
+using UnityEngine.Events;
 
 namespace Assets.Global
 {
@@ -7,5 +8,6 @@ namespace Assets.Global
         UnityEvent<IShipDestroyedEventArgs> OnShipDestroyed { get; }
         UnityEvent<IShipSavedEventArgs> OnShipSaved { get; }
         UnityEvent<int> OnStageChanged { get; }
+        UnityEvent<AudioClip> VoiceOverEvent { get; }
     }
 }

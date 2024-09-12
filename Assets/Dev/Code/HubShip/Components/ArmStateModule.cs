@@ -46,6 +46,7 @@ namespace Assets.HubShip
 
             state = ArmState.Active;
             eventProcessor.OnStateChanged.Invoke(state);
+            globalEventProcessor.VoiceOverEvent.Invoke(settingsModule.Settings.ActivationAudio);
         }
     }
 }
