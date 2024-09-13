@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 660b53f55ac93eb45a8cdd49571ec809, type: 3}
   m_Name: TetraShipSettings
   m_EditorClassIdentifier: 
-  value: 4
-  speed: 4
+  value: 1
+  speed: 3

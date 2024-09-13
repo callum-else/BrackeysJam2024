@@ -43,7 +43,7 @@ namespace Assets.Ships
             lineRenderer.SetPosition(lineRenderer.positionCount - 1, position);
         }
 
-        private void ResetPath()
+        public void ResetPath()
         {
             path.Clear();
             lineRenderer.positionCount = 0;

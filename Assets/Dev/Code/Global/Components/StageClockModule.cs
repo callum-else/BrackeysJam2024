@@ -61,7 +61,6 @@ namespace Assets.Global
                 return;
 
             currTime += Time.fixedDeltaTime;
-            //Debug.Log($"{currTime / 30} - {stage}");
             if (currTime / 30 > stage)
             {
                 stage++;

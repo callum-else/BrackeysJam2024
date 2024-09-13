@@ -31,7 +31,7 @@ namespace Assets.PlayerInteraction
             }
 
             var ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-            if (!Physics.Raycast(ray, out var hit, 50f))
+            if (!Physics.Raycast(ray, out var hit, 500f))
                 return;
 
             var module = hit.collider.GetComponentInParent<IRecievePrimaryInteraction>();

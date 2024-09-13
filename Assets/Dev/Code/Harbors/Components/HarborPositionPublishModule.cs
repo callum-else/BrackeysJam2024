@@ -42,7 +42,6 @@ namespace Assets.HubShip
             if (Time.time < nextPublishTime)
                 return;
 
-            //Debug.Log($"Publishing {gameObject.name}");
             gepm.HarborPositionEvent.Invoke(harborCollider.position);
             nextPublishTime += publishDelay;
         }
