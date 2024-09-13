@@ -6,5 +6,6 @@ namespace Assets.Ships
     public interface IShipPathModule
     {
         List<Vector3> Path { get; }
+        Vector3? GetNext();
     }
 }

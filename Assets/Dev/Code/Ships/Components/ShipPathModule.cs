@@ -9,6 +9,7 @@ namespace Assets.Ships
     {
         private LineRenderer lineRenderer;
         private List<Vector3> path = new();
+        private int currIndex = 0;
 
         public List<Vector3> Path => path;
 
@@ -32,6 +33,20 @@ namespace Assets.Ships
         {
             path.Clear();
             lineRenderer.positionCount = 0;
+            currIndex = 0;
+        }
+
+        public void OnInteractionEnd()
+        {
+            Debug.Log("End");
+        }
+
+        public Vector3? GetNext()
+        {
+            if (currIndex + 1 >= path.Count)
+                return null;
+
+            return path[++currIndex];
         }
     }
 }

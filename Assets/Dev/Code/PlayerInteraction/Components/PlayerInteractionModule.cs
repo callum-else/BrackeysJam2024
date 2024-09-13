@@ -22,7 +22,11 @@ namespace Assets.PlayerInteraction
 
             if (!isInputDown)
             {
-                target = null;
+                if (target != null)
+                {
+                    target.OnInteractionEnd();
+                    target = null;
+                }
                 return;
             }
 
