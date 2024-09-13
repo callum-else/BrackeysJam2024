@@ -2,12 +2,6 @@ using Assets.Global;
 using Assets.Ships;
 using UnityEngine;
 
-public class ShipSettingsModule : MonoBehaviour, IShipSettingsModule
-{
-    [SerializeField] private ShipSettings settings;
-    public IShipSettings Settings => settings;
-}
-
 public class ShipCrashedEventArgs : IShipCrashedEventArgs
 {
     public Vector3 Location { get; set; }
@@ -21,6 +15,7 @@ public class ShipSavedEventArgs : IShipSavedEventArgs
 
 public class ShipGlitchedEventArgs : IShipGlitchedEventArgs
 {
+    public int InstanceID { get; set; }
     public int Value { get; set; }
 }
 
@@ -67,6 +62,7 @@ public class ShipEventProcessorModule : MonoBehaviour
             case ColliderType.Glitch:
                 gepm.OnShipGlitched.Invoke(new ShipGlitchedEventArgs()
                 {
+                    InstanceID = collision.GetInstanceID(),
                     Value = sm.Settings.Value
                 });
                 DisposeSelf();

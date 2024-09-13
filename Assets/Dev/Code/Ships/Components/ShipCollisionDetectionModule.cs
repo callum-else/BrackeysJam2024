@@ -10,7 +10,6 @@ namespace Assets.Ships
 
         private void OnCollisionEnter(Collision c)
         {
-            Debug.Log("Collided");
             if (!c.collider.TryGetComponent<ICollisionModule>(out var col))
                 return;
 

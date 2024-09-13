@@ -2,6 +2,7 @@
 {
     public interface IGlitchEffectAnimationModule
     {
-        public void AnimateSpawn();
+        public void AnimateSpawn(int scaleDelta);
+        public void ApplyScaleDelta(int delta);
     }
 }
