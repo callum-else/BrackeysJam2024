@@ -2,6 +2,7 @@ using Assets.PlayerInteraction;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Assets.Ships
 {
@@ -11,11 +12,14 @@ namespace Assets.Ships
         private List<Vector3> path = new();
         private int currIndex = 0;
 
+        private UnityEvent pathStartedEvent;
+        public UnityEvent PathStartedEvent => pathStartedEvent ??= new();
+
         public List<Vector3> Path => path;
 
         private void Awake()
         {
-            lineRenderer = GetComponent<LineRenderer>();
+            lineRenderer = GetComponentInChildren<LineRenderer>();
         }
 
         public void GetMouseWorldPosition(Vector3 position)
@@ -34,11 +38,12 @@ namespace Assets.Ships
             path.Clear();
             lineRenderer.positionCount = 0;
             currIndex = 0;
+            PathStartedEvent.Invoke();
         }
 
         public void OnInteractionEnd()
         {
-            Debug.Log("End");
+            //Debug.Log("End");
         }
 
         public Vector3? GetNext()

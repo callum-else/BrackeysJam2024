@@ -1,3 +1,4 @@
+using Assets.Global;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -5,7 +6,7 @@ namespace Assets.Environmental
 {
     public class GlitchSpawnModule : MonoBehaviour
     {
-        IGlitchEventProcessorModule eventModule;
+        private IGlobalEventProcessorModule gepm;
         private ObjectPool<IGlitchEffectPoolObjModule> pool;
         private GameObject glitchPrefab;
 
@@ -14,7 +15,7 @@ namespace Assets.Environmental
             var refs = GetComponent<IGlitchSpawnModuleReferences>();
             glitchPrefab = refs.GlitchPrefab;
 
-            eventModule = GetComponent<IGlitchEventProcessorModule>();
+            gepm = GetComponent<IGlobalEventProcessorModule>();
 
             pool = new ObjectPool<IGlitchEffectPoolObjModule>(
                 createFunc: () => 
@@ -26,15 +27,15 @@ namespace Assets.Environmental
         }
 
         private void OnEnable() => 
-            eventModule.GlitchSpawnEvent.AddListener(HandleGlitchSpawnEvent);
+            gepm.OnShipCrashed.AddListener(HandleGlitchSpawnEvent);
 
         private void OnDisable() =>
-            eventModule.GlitchSpawnEvent.RemoveListener(HandleGlitchSpawnEvent);
+            gepm.OnShipCrashed.RemoveListener(HandleGlitchSpawnEvent);
 
-        public void HandleGlitchSpawnEvent(Vector3 location)
+        public void HandleGlitchSpawnEvent(IShipCrashedEventArgs args)
         {
             pool.Get(out var effect);
-            effect.EnableForPool(location);
+            effect.EnableForPool(args.Location);
             effect.gameObject.SetActive(true);
         }
     }

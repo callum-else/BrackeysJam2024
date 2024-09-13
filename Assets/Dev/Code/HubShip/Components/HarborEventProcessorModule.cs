@@ -1,4 +1,3 @@
-using Assets.Global;
 using UnityEngine;
 using UnityEngine.Events;
 

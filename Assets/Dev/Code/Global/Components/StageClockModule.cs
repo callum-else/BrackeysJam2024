@@ -27,7 +27,7 @@ namespace Assets.Global
             eventProcessor.PauseClockEvent.AddListener(PauseClock);
 
             globalEventProcessor.OnShipSaved.AddListener(HandleShipSaved);
-            globalEventProcessor.OnShipDestroyed.AddListener(HandleShipDestroyed);
+            globalEventProcessor.OnShipCrashed.AddListener(HandleShipDestroyed);
         }
 
         private void OnDisable()
@@ -36,7 +36,7 @@ namespace Assets.Global
             eventProcessor.PauseClockEvent.RemoveListener(PauseClock);
 
             globalEventProcessor.OnShipSaved.RemoveListener(HandleShipSaved);
-            globalEventProcessor.OnShipDestroyed.RemoveListener(HandleShipDestroyed);
+            globalEventProcessor.OnShipCrashed.RemoveListener(HandleShipDestroyed);
         }
 
         private void HandleShipSaved(IShipSavedEventArgs args)
@@ -44,7 +44,7 @@ namespace Assets.Global
             currTime -= args.Value * 0.05f;
         }
 
-        private void HandleShipDestroyed(IShipDestroyedEventArgs args)
+        private void HandleShipDestroyed(IShipCrashedEventArgs args)
         {
             currTime += args.Value * 0.05f;
         }

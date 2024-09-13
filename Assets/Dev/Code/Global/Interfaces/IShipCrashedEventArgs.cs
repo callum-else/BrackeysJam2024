@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public interface IShipDestroyedEventArgs
+public interface IShipCrashedEventArgs
 {
     Vector3 Location { get; set; }
     int Value { get; set; }

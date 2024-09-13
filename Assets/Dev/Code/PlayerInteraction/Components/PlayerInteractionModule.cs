@@ -34,7 +34,7 @@ namespace Assets.PlayerInteraction
             if (!Physics.Raycast(ray, out var hit, 50f))
                 return;
 
-            var module = hit.collider.GetComponent<IRecievePrimaryInteraction>();
+            var module = hit.collider.GetComponentInParent<IRecievePrimaryInteraction>();
             if (module == null)
                 return;
 

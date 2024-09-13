@@ -6,8 +6,10 @@ namespace Assets.Ships
 {
     public class ShipNavigationModule : MonoBehaviour
     {
-        private IShipPathModule pathModule;
-        private IGlobalEventProcessorModule globalEventProcessor;
+        private IShipPathModule pm;
+        private IGlobalEventProcessorModule gepm;
+        private Rigidbody rb;
+
         private Vector3? harborPos;
         private Vector3? pathPos;
         private Vector3 target;
@@ -16,15 +18,27 @@ namespace Assets.Ships
 
         private void Awake()
         {
-            pathModule = GetComponent<IShipPathModule>();
-            globalEventProcessor = GetComponent<IGlobalEventProcessorModule>();
+            pm = GetComponent<IShipPathModule>();
+            gepm = GetComponent<IGlobalEventProcessorModule>();
+            rb = GetComponent<Rigidbody>();
         }
 
-        private void OnEnable() =>
-            globalEventProcessor.HarborPositionEvent.AddListener(CalculateClosestHarbor);
+        private void OnEnable()
+        {
+            gepm.HarborPositionEvent.AddListener(CalculateClosestHarbor);
+            pm.PathStartedEvent.AddListener(HandlePathStarted);
+        }
 
-        private void OnDisable() =>
-            globalEventProcessor.HarborPositionEvent.RemoveListener(CalculateClosestHarbor);
+        private void OnDisable()
+        {
+            gepm.HarborPositionEvent.RemoveListener(CalculateClosestHarbor);
+            pm.PathStartedEvent.RemoveListener(HandlePathStarted);
+        }
+
+        private void HandlePathStarted()
+        {
+            pathPos = null;
+        }
 
         private void CalculateClosestHarbor(Vector3 pos)
         {
@@ -36,8 +50,8 @@ namespace Assets.Ships
 
         private Vector3 GetCurrentTarget()
         {
-            if (pathModule.Path.Count > 0 && (!pathPos.HasValue || Vector3.Distance(transform.position, pathPos.Value) < 0.25f))
-                pathPos = pathModule.GetNext();
+            if (pm.Path.Count > 0 && (!pathPos.HasValue || Vector3.Distance(transform.position, pathPos.Value) < 0.25f))
+                pathPos = pm.GetNext();
 
             return pathPos ?? harborPos ?? Vector3.zero;
         }
@@ -47,8 +61,8 @@ namespace Assets.Ships
             target = GetCurrentTarget();
             direction = Vector3.Lerp(direction, (target - transform.position).normalized, 0.25f);
 
-            transform.position += direction * Time.fixedDeltaTime * speed;
             transform.LookAt(transform.position + direction);
+            rb.position += direction * Time.fixedDeltaTime * speed;
         }
     }
 }

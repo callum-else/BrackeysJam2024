@@ -5,8 +5,9 @@ namespace Assets.Global
 {
     public interface IGlobalEventProcessorModule
     {
-        UnityEvent<IShipDestroyedEventArgs> OnShipDestroyed { get; }
+        UnityEvent<IShipCrashedEventArgs> OnShipCrashed { get; }
         UnityEvent<IShipSavedEventArgs> OnShipSaved { get; }
+        UnityEvent<IShipGlitchedEventArgs> OnShipGlitched { get; }
         UnityEvent<int> OnStageChanged { get; }
         UnityEvent<AudioClip> VoiceOverEvent { get; }
         UnityEvent<Vector3> HarborPositionEvent { get; }
