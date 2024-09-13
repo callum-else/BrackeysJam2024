@@ -2,7 +2,6 @@
 
 namespace Assets.Environmental
 {
-
     public class GlitchEffectPoolObjModule : MonoBehaviour, IGlitchEffectPoolObjModule
     {
         private IGlitchEffectAnimationModule animator;

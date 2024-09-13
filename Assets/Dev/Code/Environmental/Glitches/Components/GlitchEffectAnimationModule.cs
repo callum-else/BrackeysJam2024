@@ -26,15 +26,6 @@ namespace Assets.Environmental
         private Vector3 CalculateTargetScale() =>
             originScale * (1 + (sizeDelta * 0.01f));
 
-        //private IEnumerable<AnimationStep> GetSpawnAnimation()
-        //{
-        //    transform.localScale = Vector3.zero;
-        //    return spawnAnimation ??= new AnimationStep[1]
-        //    {
-        //        new AnimationStep(1f, (x) => transform.DOScale(originScale * (1 + (sizeDelta * 0.05f)), x))
-        //    };
-        //}
-
         public void ApplyScaleDelta(int delta)
         {
             if (sizeDelta > 150)

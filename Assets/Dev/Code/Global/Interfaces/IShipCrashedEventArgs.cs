@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 
-public interface IShipCrashedEventArgs
+namespace Assets.Global
 {
-    Vector3 Location { get; set; }
-    int Value { get; set; }
+    public interface IShipCrashedEventArgs
+    {
+        Vector3 Location { get; set; }
+        int Value { get; set; }
+    }
 }
