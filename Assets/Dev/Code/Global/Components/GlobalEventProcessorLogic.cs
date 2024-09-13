@@ -5,16 +5,25 @@ namespace Assets.Global
 {
     public static class GlobalEventProcessorLogic
     {
-        private static UnityEvent<IShipDestroyedEventArgs> onShipDestroyed;
-        public static UnityEvent<IShipDestroyedEventArgs> OnShipDestroyed => onShipDestroyed ??= new();
+        private static UnityEvent<IShipCrashedEventArgs> onShipCrashed;
+        public static UnityEvent<IShipCrashedEventArgs> OnShipCrashed => onShipCrashed ??= new();
 
         private static UnityEvent<IShipSavedEventArgs> onShipSaved;
         public static UnityEvent<IShipSavedEventArgs> OnShipSaved => onShipSaved ??= new();
 
+        private static UnityEvent<IShipGlitchedEventArgs> onShipGlitched;
+        public static UnityEvent<IShipGlitchedEventArgs> OnShipGlitched => onShipGlitched ??= new();
+
+
         private static UnityEvent<int> onStageChanged;
         public static UnityEvent<int> OnStageChanged => onStageChanged ??= new();
 
+
         private static UnityEvent<AudioClip> voiceOverEvent;
         public static UnityEvent<AudioClip> VoiceOverEvent => voiceOverEvent ??= new();
+
+
+        private static UnityEvent<Vector3> harborPositionEvent;
+        public static UnityEvent<Vector3> HarborPositionEvent => harborPositionEvent ??= new();
     }
 }

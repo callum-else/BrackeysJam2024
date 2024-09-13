@@ -1,41 +1,44 @@
+using Assets.Global;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.Pool;
 
 namespace Assets.Environmental
 {
     public class GlitchSpawnModule : MonoBehaviour
     {
-        IGlitchEventProcessorModule eventModule;
-        private ObjectPool<IGlitchEffectPoolObjModule> pool;
+        private IGlobalEventProcessorModule gepm;
+        private List<IGlitchEffectPoolObjModule> pool = new();
         private GameObject glitchPrefab;
 
         private void Awake()
         {
-            var refs = GetComponent<IGlitchSpawnModuleReferences>();
-            glitchPrefab = refs.GlitchPrefab;
-
-            eventModule = GetComponent<IGlitchEventProcessorModule>();
-
-            pool = new ObjectPool<IGlitchEffectPoolObjModule>(
-                createFunc: () => 
-                { 
-                    var obj = Instantiate(glitchPrefab, transform).GetComponent<IGlitchEffectPoolObjModule>();
-                    obj.gameObject.SetActive(false);
-                    return obj;
-                });
+            gepm = GetComponent<IGlobalEventProcessorModule>();
+            glitchPrefab = GetComponent<IGlitchSpawnModuleReferences>().GlitchPrefab;
         }
 
-        private void OnEnable() => 
-            eventModule.GlitchSpawnEvent.AddListener(HandleGlitchSpawnEvent);
+        private void OnEnable() =>
+            gepm.OnShipCrashed.AddListener(HandleGlitchSpawnEvent);
 
         private void OnDisable() =>
-            eventModule.GlitchSpawnEvent.RemoveListener(HandleGlitchSpawnEvent);
+            gepm.OnShipCrashed.RemoveListener(HandleGlitchSpawnEvent);
+        
 
-        public void HandleGlitchSpawnEvent(Vector3 location)
+        public void HandleGlitchSpawnEvent(IShipCrashedEventArgs args)
         {
-            pool.Get(out var effect);
-            effect.EnableForPool(location);
-            effect.gameObject.SetActive(true);
+            var overlap = pool.FirstOrDefault(x => Vector3.Distance(x.transform.position, args.Location) < Mathf.Max(x.transform.localScale.magnitude, 1f));
+            if (overlap != null)
+            {
+                overlap.IncreaseCapturedValue(args.Value);
+                return;
+            }
+
+            var obj = Instantiate(glitchPrefab, transform).GetComponent<IGlitchEffectPoolObjModule>();
+            pool.Add(obj);
+            obj.gameObject.SetActive(false);
+
+            obj.EnableForPool(args.Location, args.Value);
+            obj.gameObject.SetActive(true);
         }
     }
 }

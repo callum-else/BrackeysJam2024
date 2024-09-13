@@ -15,10 +15,10 @@ namespace Assets.Environmental
             collider = GetComponent<Collider>();
         }
 
-        public void EnableForPool(Vector3 location)
+        public void EnableForPool(Vector3 location, int capturedValue)
         {
             transform.position = location;
-            animator.AnimateSpawn();
+            animator.AnimateSpawn(capturedValue);
             renderer.enabled = true;
             collider.enabled = true;
         }
@@ -27,6 +27,11 @@ namespace Assets.Environmental
         {
             renderer.enabled = false;
             collider.enabled = false;
+        }
+
+        public void IncreaseCapturedValue(int value)
+        {
+            animator.ApplyScaleDelta(value);
         }
     }
 }
