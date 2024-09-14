@@ -12,21 +12,14 @@ public class GlitchPoolAnimationModule : MonoBehaviour
     {
         gepm = GetComponent<IGlobalEventProcessorModule>();
         gpsm = GetComponent<IGlitchPoolSpawnModule>();
+        gepm.GameOverAnimationEvent.AddListener(HandleGameOverAnim);
     }
 
-    private void OnEnable()
+    private void HandleGameOverAnim(GlobalGameOverAnimationPhase phase)
     {
-        gepm.GameOverEvent.AddListener(HandleGameOverEvent);
-    }
-
-    private void OnDisable()
-    {
-        gepm.GameOverEvent.RemoveListener(HandleGameOverEvent);
-    }
-
-    private void HandleGameOverEvent(IGameOverEventArgs args)
-    {
+        if (phase != GlobalGameOverAnimationPhase.SpawnGlitches) return;
         StartCoroutine(SpawnObjectsExponentially());
+        gepm.GameOverAnimationEvent.RemoveListener(HandleGameOverAnim);
     }
 
     private IEnumerator SpawnObjectsExponentially()

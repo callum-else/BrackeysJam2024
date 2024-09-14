@@ -28,5 +28,11 @@ namespace Assets.Global
 
         private static UnityEvent<IGameOverEventArgs> gameOverEvent;
         public static UnityEvent<IGameOverEventArgs> GameOverEvent => gameOverEvent ??= new();
+
+        private static UnityEvent<IIntroAnimationEventArgs> introAnimationEvent;
+        public static UnityEvent<IIntroAnimationEventArgs> IntroAnimationEvent => introAnimationEvent ??= new();
+
+        private static UnityEvent<GlobalGameOverAnimationPhase> gameOverAnimationEvent;
+        public static UnityEvent<GlobalGameOverAnimationPhase> GameOverAnimationEvent => gameOverAnimationEvent ??= new();
     }
 }

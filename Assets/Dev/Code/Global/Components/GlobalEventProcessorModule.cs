@@ -12,5 +12,7 @@ namespace Assets.Global
         public UnityEvent<AudioClip> VoiceOverEvent => GlobalEventProcessorLogic.VoiceOverEvent;
         public UnityEvent<Vector3> HarborPositionEvent => GlobalEventProcessorLogic.HarborPositionEvent;
         public UnityEvent<IGameOverEventArgs> GameOverEvent => GlobalEventProcessorLogic.GameOverEvent;
+        public UnityEvent<IIntroAnimationEventArgs> IntroAnimationEvent => GlobalEventProcessorLogic.IntroAnimationEvent;
+        public UnityEvent<GlobalGameOverAnimationPhase> GameOverAnimationEvent => GlobalEventProcessorLogic.GameOverAnimationEvent;
     }
 }

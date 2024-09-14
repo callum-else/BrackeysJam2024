@@ -1,5 +1,6 @@
 using Assets.Common;
 using Assets.Effects;
+using Assets.Global;
 using DG.Tweening;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ namespace Assets.HubShip
     {
         private IWireframeAnimationModule wam;
         private IHarborEventProcessorModule epm;
+        private IGlobalEventProcessorModule gepm;
+        private IHarborSettingsModule sm;
         private AnimationStep[] activationAnim;
 
         private Renderer arm;
@@ -22,7 +25,9 @@ namespace Assets.HubShip
         private void Awake()
         {
             wam = GetComponent<IWireframeAnimationModule>();
+            gepm = GetComponent<IGlobalEventProcessorModule>();
             epm = GetComponent<IHarborEventProcessorModule>();
+            sm = GetComponent<IHarborSettingsModule>();
             var refs = GetComponent<IHarborReferences>();
             var mm = GetComponent<IMaterialModule>();
 
@@ -68,6 +73,7 @@ namespace Assets.HubShip
         {
             new AnimationStep(1f, (x) => 
             {
+                gepm.VoiceOverEvent.Invoke(sm.Settings.ActivationAudio);
                 bubble.transform.localScale = Vector3.zero;
                 BlendWireframeMats(arm.material, active, x);
             }),

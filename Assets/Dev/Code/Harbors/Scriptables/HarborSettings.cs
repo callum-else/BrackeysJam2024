@@ -6,9 +6,9 @@ namespace Assets.HubShip
     public class HarborSettings : ScriptableObject, IHarborSettings
     {
         [SerializeField] private int activationStage;
-        public int ActivationStage { get => activationStage; }
+        public int ActivationStage => activationStage;
 
         [SerializeField] private AudioClip activationAudio;
-        public AudioClip ActivationAudio { get => activationAudio; }
+        public AudioClip ActivationAudio => activationAudio;
     }
 }

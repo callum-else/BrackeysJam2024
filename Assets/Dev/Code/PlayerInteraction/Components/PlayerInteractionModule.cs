@@ -38,8 +38,15 @@ namespace Assets.PlayerInteraction
             canInteract = true;
         }
 
-        private void HandleGameOverEvent(IGameOverEventArgs args) => 
+        private void HandleGameOverEvent(IGameOverEventArgs args)
+        {
             canInteract = false;
+            if (target != null)
+            {
+                target.OnInteractionEnd();
+                target = null;
+            }
+        }
 
         public void OnInteractPrimary(InputValue input)
         {

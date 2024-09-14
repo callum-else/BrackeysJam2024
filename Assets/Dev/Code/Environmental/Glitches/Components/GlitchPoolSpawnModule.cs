@@ -19,6 +19,8 @@ namespace Assets.Environmental
         {
             gepm = GetComponent<IGlobalEventProcessorModule>();
             glitchPrefab = GetComponent<IGlitchSpawnModuleReferences>().GlitchPrefab;
+
+            gepm.IntroAnimationEvent.AddListener(HandleIntroAnimEvent);
         }
 
         private void OnEnable()
@@ -33,9 +35,21 @@ namespace Assets.Environmental
             gepm.OnStageChanged.RemoveListener(HandleStageChanged);
         }
 
+        private void HandleIntroAnimEvent(IIntroAnimationEventArgs args)
+        {
+            if (args.Phase != GlobalIntroAnimationPhase.GlitchSpawn) return;
+            SpawnGlitchesForStage();
+            gepm.IntroAnimationEvent.RemoveListener(HandleIntroAnimEvent);
+        }
+
         private void HandleStageChanged(int stage)
         {
-            if (stage == 0) return;
+            if (stage < 2) return;
+            SpawnGlitchesForStage();
+        }
+
+        private void SpawnGlitchesForStage()
+        {
             for (int i = 0; i < spawnPerStage; i++)
                 SpawnRandomGlitch(Random.Range(0, 10));
         }

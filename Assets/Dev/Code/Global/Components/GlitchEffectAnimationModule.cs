@@ -9,6 +9,7 @@ namespace Assets.Global
 {
     public class GlitchEffectAnimationModule : AnimationModule
     {
+        private IGlobalEventProcessorModule gepm;
         private IGlobalScoreTrackerModule gscm;
 
         private IAnalogGlitch analogGlitch;
@@ -16,14 +17,16 @@ namespace Assets.Global
         private float analogIntensity = 0.2f;
 
         private IDigitalGlitch digitalGlitch;
-        private IEnumerable<AnimationStep> digitalGlitchPlayAnim;
 
         private void Awake()
         {
+            gepm = GetComponent<IGlobalEventProcessorModule>();
             gscm = GetComponent<IGlobalScoreTrackerModule>();
             analogGlitch = GetComponentInChildren<IAnalogGlitch>();
             digitalGlitch = GetComponentInChildren<IDigitalGlitch>();
             UpdateAnalogFx();
+
+            gepm.GameOverAnimationEvent.AddListener(HandleGameOverAnimEvent);
         }
 
         private void OnEnable()
@@ -54,14 +57,18 @@ namespace Assets.Global
             analogGlitch.colorDrift = analogIntensity;
         }
 
-        private void HandleGameOverEvent(IGameOverEventArgs args) =>
+        private void HandleGameOverAnimEvent(GlobalGameOverAnimationPhase phase)
+        {
+            if (phase != GlobalGameOverAnimationPhase.GlitchEffect) return;
             Play(GetDigitalGlitchPlayAnim());
-
+            gepm.GameOverAnimationEvent.RemoveListener(HandleGameOverAnimEvent);
+        }
+            
         private IEnumerable<AnimationStep> GetDigitalGlitchPlayAnim()
         {
-            return digitalGlitchPlayAnim ??= new AnimationStep[]
+            return new AnimationStep[]
             {
-                new AnimationStep(2f, _ =>
+                new AnimationStep(4f, _ =>
                 {
                     digitalGlitch.Intensity = 1f;
                     digitalGlitch.FlipIntensity = 1f;

@@ -6,7 +6,9 @@ namespace Assets.UI
 {
     public class GameplayUIModule : MonoBehaviour
     {
+        private IGlobalEventProcessorModule gepm;
         private IGlobalScoreTrackerModule gscm;
+        private GameObject uiParent;
         private TextMeshProUGUI soulsSavedScoreText;
         private TextMeshProUGUI soulsLostScoreText;
         private TextMeshProUGUI soulsLostScoreTitle;
@@ -16,8 +18,11 @@ namespace Assets.UI
 
         private void Awake()
         {
+            gepm = GetComponent<IGlobalEventProcessorModule>();
             gscm = GetComponent<IGlobalScoreTrackerModule>();
+
             var refs = GetComponent<IGameplayUIModuleReferences>();
+            uiParent = refs.GameplayUIParent;
             soulsSavedScoreText = refs.SoulsSavedScoreText;
             soulsLostScoreText = refs.SoulsLostScoreText;
             soulsLostScoreTitle = refs.SoulsLostScoreTitle;
@@ -25,6 +30,8 @@ namespace Assets.UI
 
             soulsLostTextCol = soulsLostScoreText.color;
             soulsLostTitleCol = soulsLostScoreTitle.color;
+
+            gepm.GameOverAnimationEvent.AddListener(HandleGameOverAnimEvent);
         }
 
         private void OnEnable()
@@ -52,6 +59,13 @@ namespace Assets.UI
         {
             soulsLostScoreText.color = Color.Lerp(soulsLostTextCol, Color.red, value);
             soulsLostScoreTitle.color = Color.Lerp(soulsLostTitleCol, Color.red, value);
+        }
+
+        private void HandleGameOverAnimEvent(GlobalGameOverAnimationPhase phase)
+        {
+            if (phase != GlobalGameOverAnimationPhase.ShowGameOverScreen) return;
+            uiParent.SetActive(false);
+            gepm.GameOverAnimationEvent.RemoveListener(HandleGameOverAnimEvent);
         }
     }
 }
