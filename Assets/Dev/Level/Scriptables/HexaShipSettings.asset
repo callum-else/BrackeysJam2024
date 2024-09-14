@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 660b53f55ac93eb45a8cdd49571ec809, type: 3}
   m_Name: HexaShipSettings
   m_EditorClassIdentifier: 
-  value: 6
-  speed: 3
+  value: 2
+  speed: 2.5

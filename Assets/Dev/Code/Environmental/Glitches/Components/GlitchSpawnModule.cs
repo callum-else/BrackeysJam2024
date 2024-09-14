@@ -11,25 +11,52 @@ namespace Assets.Environmental
         private List<IGlitchEffectPoolObjModule> pool = new();
         private GameObject glitchPrefab;
 
+        private float maxSpawnDist = 30f;
+        private float minSpawnDist = 15f;
+        private const int spawnPerStage = 2;
+
         private void Awake()
         {
             gepm = GetComponent<IGlobalEventProcessorModule>();
             glitchPrefab = GetComponent<IGlitchSpawnModuleReferences>().GlitchPrefab;
         }
 
-        private void OnEnable() =>
-            gepm.OnShipCrashed.AddListener(HandleGlitchSpawnEvent);
-
-        private void OnDisable() =>
-            gepm.OnShipCrashed.RemoveListener(HandleGlitchSpawnEvent);
-        
-
-        public void HandleGlitchSpawnEvent(IShipCrashedEventArgs args)
+        private void OnEnable()
         {
-            var overlap = pool.FirstOrDefault(x => Vector3.Distance(x.transform.position, args.Location) < Mathf.Max(x.transform.localScale.magnitude, 1f));
+            gepm.OnShipCrashed.AddListener(HandleShipCrashed);
+            gepm.OnStageChanged.AddListener(HandleStageChanged);
+        }
+
+        private void OnDisable()
+        {
+            gepm.OnShipCrashed.RemoveListener(HandleShipCrashed);
+            gepm.OnStageChanged.RemoveListener(HandleStageChanged);
+        }
+        
+        private void HandleStageChanged(int stage)
+        {
+            if (stage == 0) return;
+
+            Vector3 randPos;
+            for (int i = 0; i < spawnPerStage; i++)
+            {
+                randPos = Random.insideUnitSphere;
+                randPos.y = 0;
+                SpawnGlitch(randPos.normalized * Random.Range(minSpawnDist, maxSpawnDist));
+            }
+        }
+
+        private void HandleShipCrashed(IShipCrashedEventArgs args)
+        {
+            SpawnGlitch(args.Location, args.Value);
+        }
+
+        private void SpawnGlitch(Vector3 location, int value = 0)
+        {
+            var overlap = pool.FirstOrDefault(x => Vector3.Distance(x.transform.position, location) < Mathf.Max(x.transform.localScale.magnitude, 1f));
             if (overlap != null)
             {
-                overlap.IncreaseCapturedValue(args.Value);
+                overlap.IncreaseCapturedValue(value);
                 return;
             }
 
@@ -37,7 +64,7 @@ namespace Assets.Environmental
             pool.Add(obj);
             obj.gameObject.SetActive(false);
 
-            obj.EnableForPool(args.Location, args.Value);
+            obj.EnableForPool(location, value);
             obj.gameObject.SetActive(true);
         }
     }

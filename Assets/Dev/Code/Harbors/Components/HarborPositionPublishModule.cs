@@ -11,7 +11,7 @@ namespace Assets.HubShip
 
         private bool canPublish = false;
         private float nextPublishTime;
-        private const float publishDelay = 10f;
+        private const float publishDelay = 3f;
 
         private void Awake()
         {
@@ -42,7 +42,6 @@ namespace Assets.HubShip
             if (Time.time < nextPublishTime)
                 return;
 
-            //Debug.Log($"Publishing {gameObject.name}");
             gepm.HarborPositionEvent.Invoke(harborCollider.position);
             nextPublishTime += publishDelay;
         }

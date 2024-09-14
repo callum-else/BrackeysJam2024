@@ -8,12 +8,14 @@ namespace Assets.Ships
         private IShipCollisionDetectionModule cdm;
         private IGlobalEventProcessorModule gepm;
         private IShipSettingsModule sm;
+        private IShipPoolObjModule pom;
 
         private void Awake()
         {
             cdm = GetComponentInChildren<IShipCollisionDetectionModule>();
             gepm = GetComponent<IGlobalEventProcessorModule>();
             sm = GetComponent<IShipSettingsModule>();
+            pom = GetComponent<IShipPoolObjModule>();
         }
 
         private void OnEnable() =>
@@ -32,7 +34,7 @@ namespace Assets.Ships
                         Location = transform.position + (collision.transform.position - transform.position) * 0.5f,
                         Value = sm.Settings.Value
                     });
-                    DisposeSelf();
+                    pom.ResetObjAndRelease();
                     break;
 
                 case ColliderType.Harbor:
@@ -40,7 +42,7 @@ namespace Assets.Ships
                     {
                         Value = sm.Settings.Value
                     });
-                    DisposeSelf();
+                    pom.ResetObjAndRelease();
                     break;
 
                 case ColliderType.Glitch:
@@ -49,14 +51,9 @@ namespace Assets.Ships
                         InstanceID = collision.GetInstanceID(),
                         Value = sm.Settings.Value
                     });
-                    DisposeSelf();
+                    pom.ResetObjAndRelease();
                     break;
             }
-        }
-
-        private void DisposeSelf()
-        {
-            Destroy(gameObject);
         }
     }
 }

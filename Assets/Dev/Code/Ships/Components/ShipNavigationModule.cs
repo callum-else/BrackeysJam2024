@@ -1,5 +1,5 @@
 ﻿using Assets.Global;
-using TreeEditor;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Ships
@@ -7,6 +7,7 @@ namespace Assets.Ships
     public class ShipNavigationModule : MonoBehaviour
     {
         private IShipPathModule pm;
+        private IShipSettingsModule sm;
         private IGlobalEventProcessorModule gepm;
         private Rigidbody rb;
 
@@ -14,11 +15,11 @@ namespace Assets.Ships
         private Vector3? pathPos;
         private Vector3 target;
         private Vector3 direction;
-        private float speed = 2f;
 
         private void Awake()
         {
             pm = GetComponent<IShipPathModule>();
+            sm = GetComponent<IShipSettingsModule>();
             gepm = GetComponent<IGlobalEventProcessorModule>();
             rb = GetComponent<Rigidbody>();
         }
@@ -62,7 +63,7 @@ namespace Assets.Ships
             direction = Vector3.Lerp(direction, (target - transform.position).normalized, 0.25f);
 
             transform.LookAt(transform.position + direction);
-            rb.position += direction * Time.fixedDeltaTime * speed;
+            rb.position += direction * Time.fixedDeltaTime * sm.Settings.Speed;
         }
     }
 }

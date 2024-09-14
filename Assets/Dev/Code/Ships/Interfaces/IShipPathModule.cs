@@ -9,5 +9,6 @@ namespace Assets.Ships
         List<Vector3> Path { get; }
         UnityEvent PathStartedEvent { get; }
         Vector3? GetNext();
+        void ResetPath();
     }
 }
