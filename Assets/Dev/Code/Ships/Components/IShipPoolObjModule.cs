@@ -9,6 +9,7 @@ namespace Assets.Ships
     public interface IShipPoolObjModule : IComponent
     {
         public void ResetObj();
+        public void ResetObjAndRelease();
         public void InjectRelease(Action<IShipPoolObjModule> release);
     }
 }

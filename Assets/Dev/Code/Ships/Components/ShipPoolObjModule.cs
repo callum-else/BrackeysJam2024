@@ -16,6 +16,11 @@ namespace Assets.Ships
         public void ResetObj()
         {
             pm.ResetPath();
+        }
+
+        public void ResetObjAndRelease()
+        {
+            ResetObj();
             releaseMethod.Invoke(this);
         }
 

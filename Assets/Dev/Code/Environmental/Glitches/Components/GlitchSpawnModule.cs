@@ -11,8 +11,9 @@ namespace Assets.Environmental
         private List<IGlitchEffectPoolObjModule> pool = new();
         private GameObject glitchPrefab;
 
-        private float maxSpawnDist = 35f;
+        private float maxSpawnDist = 30f;
         private float minSpawnDist = 15f;
+        private const int spawnPerStage = 2;
 
         private void Awake()
         {
@@ -34,11 +35,10 @@ namespace Assets.Environmental
         
         private void HandleStageChanged(int stage)
         {
-            if (stage == 0)
-                return;
+            if (stage == 0) return;
 
             Vector3 randPos;
-            for (int i = 0; i < stage; i++)
+            for (int i = 0; i < spawnPerStage; i++)
             {
                 randPos = Random.insideUnitSphere;
                 randPos.y = 0;

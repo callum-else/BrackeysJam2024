@@ -41,12 +41,12 @@ namespace Assets.Global
 
         private void HandleShipSaved(IShipSavedEventArgs args)
         {
-            currTime -= args.Value * 0.05f;
+            currTime -= args.Value * 0.1f;
         }
 
         private void HandleShipDestroyed(IShipCrashedEventArgs args)
         {
-            currTime += args.Value * 0.05f;
+            currTime += args.Value * 0.1f;
         }
 
         private void StartClock() =>
