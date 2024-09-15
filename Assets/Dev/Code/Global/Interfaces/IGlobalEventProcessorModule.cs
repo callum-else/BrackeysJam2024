@@ -11,5 +11,8 @@ namespace Assets.Global
         UnityEvent<int> OnStageChanged { get; }
         UnityEvent<AudioClip> VoiceOverEvent { get; }
         UnityEvent<Vector3> HarborPositionEvent { get; }
+        UnityEvent<IGameOverEventArgs> GameOverEvent { get; }
+        UnityEvent<IIntroAnimationEventArgs> IntroAnimationEvent { get; }
+        UnityEvent<GlobalGameOverAnimationPhase> GameOverAnimationEvent { get; }
     }
 }

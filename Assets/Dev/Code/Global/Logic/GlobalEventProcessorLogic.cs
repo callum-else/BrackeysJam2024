@@ -25,5 +25,14 @@ namespace Assets.Global
 
         private static UnityEvent<Vector3> harborPositionEvent;
         public static UnityEvent<Vector3> HarborPositionEvent => harborPositionEvent ??= new();
+
+        private static UnityEvent<IGameOverEventArgs> gameOverEvent;
+        public static UnityEvent<IGameOverEventArgs> GameOverEvent => gameOverEvent ??= new();
+
+        private static UnityEvent<IIntroAnimationEventArgs> introAnimationEvent;
+        public static UnityEvent<IIntroAnimationEventArgs> IntroAnimationEvent => introAnimationEvent ??= new();
+
+        private static UnityEvent<GlobalGameOverAnimationPhase> gameOverAnimationEvent;
+        public static UnityEvent<GlobalGameOverAnimationPhase> GameOverAnimationEvent => gameOverAnimationEvent ??= new();
     }
 }

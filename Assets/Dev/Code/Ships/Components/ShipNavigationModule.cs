@@ -34,6 +34,9 @@ namespace Assets.Ships
         {
             gepm.HarborPositionEvent.RemoveListener(CalculateClosestHarbor);
             pm.PathStartedEvent.RemoveListener(HandlePathStarted);
+
+            harborPos = null;
+            pathPos = null;
         }
 
         private void HandlePathStarted()

@@ -9,15 +9,17 @@ namespace Assets.Common
         private new IAnimationStep[] animation;
         private int loops = 0;
 
+        private double startTime = 0f;
         private bool isPlaying = false;
         private float nextInvoke = 0f;
         private int index = 0;
         private int loop = 0;
 
-        protected void Play(IEnumerable<IAnimationStep> animation, int loops = 0)
+        protected void Play(IEnumerable<IAnimationStep> animation, int loops = 0, double startTime = 0)
         {
             SetDefaults();
 
+            this.startTime = startTime;
             this.animation = animation.ToArray();
             this.loops = loops;
 
@@ -27,6 +29,7 @@ namespace Assets.Common
         private void SetDefaults()
         {
             isPlaying = false;
+            startTime = 0;
             nextInvoke = 0f;
             index = 0;
             loop = 0;
@@ -35,6 +38,7 @@ namespace Assets.Common
         private void HandleAnimation()
         {
             if (!isPlaying) return;
+            if (AudioSettings.dspTime < startTime) return;
             if (Time.fixedTime < nextInvoke) return;
 
             var anim = animation[index++];

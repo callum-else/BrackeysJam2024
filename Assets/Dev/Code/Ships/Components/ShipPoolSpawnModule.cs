@@ -14,6 +14,7 @@ namespace Assets.Ships
         private List<int[]> spawnRates;
         private const int tetraShipIdx = 0, hexaShipIdx = 1, octaShipIdx = 2, icosaShipIdx = 3;
 
+        private bool spawn;
         private int stage = 0;
         private float spawnSecs = 4f;
         private float nextSpawnTime;
@@ -41,27 +42,31 @@ namespace Assets.Ships
                 GenerateSpawnRateArray(new (int, int)[] { (tetraShipIdx, 5), (hexaShipIdx, 3), (octaShipIdx, 3), (icosaShipIdx, 2) }),
                 GenerateSpawnRateArray(new (int, int)[] { (tetraShipIdx, 5), (hexaShipIdx, 3), (octaShipIdx, 3), (icosaShipIdx, 3) })
             };
+
+            spawn = true; // Set as part of tutorial phase eventually
         }
 
         private void OnEnable()
         {
             gepm.OnStageChanged.AddListener(HandleStageChanged);
+            gepm.GameOverEvent.AddListener(HandleGameOverEvent);
         }
 
         private void OnDisable()
         {
             gepm.OnStageChanged.RemoveListener(HandleStageChanged);
+            gepm.GameOverEvent.RemoveListener(HandleGameOverEvent);
         }
 
         private void FixedUpdate()
         {
+            if (!spawn) return;
             if (stage == 0) return;
             if (Time.time < nextSpawnTime) return;
 
             var idxArr = spawnRates[Mathf.Min(stage - 1, spawnRates.Count - 1)];
             pools[idxArr[Random.Range(0, idxArr.Length)]].Get();
             nextSpawnTime = Time.time + Mathf.Max(spawnSecs - (0.5f * stage), 1f);
-            Debug.Log($"{nextSpawnTime} - {Time.time}");
         }
 
         private int[] GenerateSpawnRateArray((int idx, int count)[] chances)
@@ -83,6 +88,11 @@ namespace Assets.Ships
         private void HandleStageChanged(int stage)
         {
             this.stage = stage;
+        }
+
+        private void HandleGameOverEvent(IGameOverEventArgs args)
+        {
+            spawn = false;
         }
 
         private ObjectPool<IShipPoolObjModule> SetupPool(GameObject prefab, int idx)

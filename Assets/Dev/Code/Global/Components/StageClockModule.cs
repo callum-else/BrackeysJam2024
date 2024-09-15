@@ -4,8 +4,7 @@ namespace Assets.Global
 {
     public class StageClockModule : MonoBehaviour
     {
-        private IStageClockEventProcessorModule eventProcessor;
-        private IGlobalEventProcessorModule globalEventProcessor;
+        private IGlobalEventProcessorModule gepm;
 
         private bool ticking;
         private float currTime;
@@ -16,27 +15,27 @@ namespace Assets.Global
             currTime = 0;
             stage = 0;
 
-            eventProcessor = GetComponent<IStageClockEventProcessorModule>();
-            globalEventProcessor = GetComponent<IGlobalEventProcessorModule>();
-            StartClock();
+            gepm = GetComponent<IGlobalEventProcessorModule>();
         }
 
         private void OnEnable()
         {
-            eventProcessor.StartClockEvent.AddListener(StartClock);
-            eventProcessor.PauseClockEvent.AddListener(PauseClock);
-
-            globalEventProcessor.OnShipSaved.AddListener(HandleShipSaved);
-            globalEventProcessor.OnShipCrashed.AddListener(HandleShipDestroyed);
+            gepm.IntroAnimationEvent.AddListener(HandleIntroAnimEvent);
+            gepm.OnShipSaved.AddListener(HandleShipSaved);
+            gepm.OnShipCrashed.AddListener(HandleShipDestroyed);
         }
 
         private void OnDisable()
         {
-            eventProcessor.StartClockEvent.RemoveListener(StartClock);
-            eventProcessor.PauseClockEvent.RemoveListener(PauseClock);
+            gepm.IntroAnimationEvent.RemoveListener(HandleIntroAnimEvent);
+            gepm.OnShipSaved.RemoveListener(HandleShipSaved);
+            gepm.OnShipCrashed.RemoveListener(HandleShipDestroyed);
+        }
 
-            globalEventProcessor.OnShipSaved.RemoveListener(HandleShipSaved);
-            globalEventProcessor.OnShipCrashed.RemoveListener(HandleShipDestroyed);
+        private void HandleIntroAnimEvent(IIntroAnimationEventArgs args)
+        {
+            if (args.Phase != GlobalIntroAnimationPhase.BeginClock) return;
+            StartClock();
         }
 
         private void HandleShipSaved(IShipSavedEventArgs args)
@@ -64,7 +63,7 @@ namespace Assets.Global
             if (currTime / 30 > stage)
             {
                 stage++;
-                globalEventProcessor.OnStageChanged.Invoke(stage);
+                gepm.OnStageChanged.Invoke(stage);
                 Debug.Log($"Stage: {stage}");
             }
         }
