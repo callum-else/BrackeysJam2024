@@ -6,18 +6,30 @@ namespace Assets.Global
     public class AudioAnimationModule : MonoBehaviour
     {
         private IGlobalEventProcessorModule gepm;
+        private IVoiceOverAudioQueueModule voaqm;
 
-        [SerializeField] private AudioSource musicIntroSource;
-        [SerializeField] private AudioSource musicLoopSource;
-        [Space]
-        [SerializeField] private AudioClip harborBootAudio;
-        [SerializeField] private AudioClip glitchSpawnAudio;
-        [SerializeField] private AudioClip gameStartAudio;
-        [SerializeField] private AudioClip gameOverAudio;
+        private AudioSource musicIntroSource;
+        private AudioSource musicLoopSource;
+        private AudioSource staticLoopSource;
+
+        private AudioClip harborBootAudio;
+        private AudioClip glitchSpawnAudio;
+        private AudioClip gameStartAudio;
+        private AudioClip gameOverAudio;
 
         private void Awake()
         {
             gepm = GetComponent<IGlobalEventProcessorModule>();
+            voaqm = GetComponent<IVoiceOverAudioQueueModule>();
+            
+            var refs = GetComponent<IAudioAnimationReferences>();
+            musicIntroSource = refs.MusicIntroAudioSource;
+            musicLoopSource = refs.MusicLoopAudioSource;
+            staticLoopSource = refs.StaticLoopAudioSource;
+            harborBootAudio = refs.HarborBootAudio;
+            glitchSpawnAudio = refs.GlitchSpawnAudio;
+            gameStartAudio = refs.GameStartAudio;
+            gameOverAudio = refs.GameOverAudio;
         }
 
         private void OnEnable()
@@ -43,15 +55,15 @@ namespace Assets.Global
                     break;
 
                 case GlobalIntroAnimationPhase.HarborBootSequence1:
-                    gepm.VoiceOverEvent.Invoke(harborBootAudio);
+                    voaqm.Enqueue(harborBootAudio);
                     break;
 
                 case GlobalIntroAnimationPhase.GlitchSpawn:
-                    gepm.VoiceOverEvent.Invoke(glitchSpawnAudio);
+                    voaqm.Enqueue(glitchSpawnAudio);
                     break;
 
                 case GlobalIntroAnimationPhase.BeginClock:
-                    gepm.VoiceOverEvent.Invoke(gameStartAudio);
+                    voaqm.Enqueue(gameStartAudio);
                     break;
             }
         }
@@ -61,11 +73,12 @@ namespace Assets.Global
             switch (phase)
             {
                 case GlobalGameOverAnimationPhase.SpawnGlitches:
-                    musicLoopSource.DOPitch(-3, 6f).OnComplete(() => musicLoopSource.Stop());
+                    musicLoopSource.DOPitch(-3, 8f).OnComplete(() => musicLoopSource.Stop());
+                    staticLoopSource.Play();
                     break;
 
                 case GlobalGameOverAnimationPhase.ShowGameOverScreen:
-                    gepm.VoiceOverEvent.Invoke(gameOverAudio);
+                    voaqm.Enqueue(gameOverAudio);
                     break;
             }
         }

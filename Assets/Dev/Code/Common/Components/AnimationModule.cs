@@ -15,6 +15,8 @@ namespace Assets.Common
         private int index = 0;
         private int loop = 0;
 
+        public bool IsPlaying => isPlaying;
+
         protected void Play(IEnumerable<IAnimationStep> animation, int loops = 0, double startTime = 0)
         {
             SetDefaults();

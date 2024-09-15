@@ -17,6 +17,7 @@ namespace Assets.Global
         private float analogIntensity = 0.2f;
 
         private IDigitalGlitch digitalGlitch;
+        private IEnumerable<AnimationStep> shipDestroyedGlitchAnim;
 
         private void Awake()
         {
@@ -32,11 +33,15 @@ namespace Assets.Global
         private void OnEnable()
         {
             gscm.OnThresholdPercentUpdated.AddListener(HandleThresholdPercentUpdated);
+            gepm.OnShipCrashed.AddListener(HandleOnShipCrashed);
+            gepm.OnShipGlitched.AddListener(HandleOnShipGlitched);
         }
 
         private void OnDisable()
         {
             gscm.OnThresholdPercentUpdated.RemoveListener(HandleThresholdPercentUpdated);
+            gepm.OnShipCrashed.RemoveListener(HandleOnShipCrashed);
+            gepm.OnShipGlitched.RemoveListener(HandleOnShipGlitched);
         }
 
         private void HandleThresholdPercentUpdated(float value)
@@ -60,11 +65,11 @@ namespace Assets.Global
         private void HandleGameOverAnimEvent(GlobalGameOverAnimationPhase phase)
         {
             if (phase != GlobalGameOverAnimationPhase.GlitchEffect) return;
-            Play(GetDigitalGlitchPlayAnim());
+            Play(GetDigitalGlitchGameOverAnim());
             gepm.GameOverAnimationEvent.RemoveListener(HandleGameOverAnimEvent);
         }
             
-        private IEnumerable<AnimationStep> GetDigitalGlitchPlayAnim()
+        private IEnumerable<AnimationStep> GetDigitalGlitchGameOverAnim()
         {
             return new AnimationStep[]
             {
@@ -77,6 +82,25 @@ namespace Assets.Global
                 }),
                 new AnimationStep(1f, _ => digitalGlitch.ShowGlitch = false)
             };
+        }
+
+        private void HandleOnShipCrashed(IShipCrashedEventArgs args) => PlayShipDestroyedGlitch();
+        private void HandleOnShipGlitched(IShipGlitchedEventArgs args) => PlayShipDestroyedGlitch();
+
+        private void PlayShipDestroyedGlitch()
+        {
+            if (IsPlaying) return;
+            Play(shipDestroyedGlitchAnim ??= new AnimationStep[]
+            {
+                new AnimationStep(0.5f, _ =>
+                {
+                    digitalGlitch.Intensity = 0.2f;
+                    digitalGlitch.FlipIntensity = 0f;
+                    digitalGlitch.ColorIntensity = 0.5f;
+                    digitalGlitch.ShowGlitch = true;
+                }),
+                new AnimationStep(0.1f, _ => digitalGlitch.ShowGlitch = false)
+            });
         }
     }
 }

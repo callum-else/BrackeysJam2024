@@ -1,42 +1,45 @@
-using Assets.Global;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VoiceOverAudioQueueModule : MonoBehaviour
+namespace Assets.Global
 {
-    private IGlobalEventProcessorModule eventProcessor;
-    private AudioSource audioSource;
-    private Queue<AudioClip> queue = new();
-
-    private void Awake()
+    public class VoiceOverAudioQueueModule : MonoBehaviour, IVoiceOverAudioQueueModule
     {
-        eventProcessor = GetComponent<IGlobalEventProcessorModule>();
-        audioSource = GetComponent<AudioSource>();
-    }
+        private IGlobalEventProcessorModule gepm;
+        private AudioSource audioSource;
+        private Queue<AudioClip> queue = new();
 
-    private void OnEnable()
-    {
-        eventProcessor.VoiceOverEvent.AddListener(HandleVoiceOverRequest);
-    }
+        private void Awake()
+        {
+            gepm = GetComponent<IGlobalEventProcessorModule>();
+            audioSource = GetComponent<IVoiceOverReferences>().VoiceOverAudioSource;
+        }
 
-    private void OnDisable()
-    {
-        eventProcessor.VoiceOverEvent.RemoveListener(HandleVoiceOverRequest);
-    }
+        private void OnEnable()
+        {
+            gepm.VoiceOverEvent.AddListener(HandleVoiceOverRequest);
+        }
 
-    private void HandleVoiceOverRequest(AudioClip clip)
-    {
-        queue.Enqueue(clip);
-    }
+        private void OnDisable()
+        {
+            gepm.VoiceOverEvent.RemoveListener(HandleVoiceOverRequest);
+        }
 
-    private void FixedUpdate()
-    {
-        if (audioSource.isPlaying)
-            return;
+        private void HandleVoiceOverRequest(AudioClip clip) =>
+            Enqueue(clip);
 
-        if (queue.Count == 0)
-            return;
+        public void Enqueue(AudioClip clip) =>
+            queue.Enqueue(clip);
 
-        audioSource.PlayOneShot(queue.Dequeue());
+        private void FixedUpdate()
+        {
+            if (audioSource.isPlaying)
+                return;
+
+            if (queue.Count == 0)
+                return;
+
+            audioSource.PlayOneShot(queue.Dequeue());
+        }
     }
 }
